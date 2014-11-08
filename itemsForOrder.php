@@ -36,3 +36,5 @@
 <?php       
     }  //Insert last bracket.
 ?></select>
+ <h4>Quantity Of Items:</h4>
+<input type="text" value="1? 2? 3?">
