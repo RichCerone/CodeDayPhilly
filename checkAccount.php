@@ -3,24 +3,34 @@
 	<font size=3>
 	<?php
 	session_start();
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	if($username&&$password)
+	$username = isset($_GET['username']);
+	$password = isset($_GET['password']);
+
+	if($username&&$password) 
 	{
-		$connect = mysql_connect("localhost","root","") or die("Couldn't connect");
-		mysql_select_db("phplogin") or die("couldn't find db");
-		$query = mysql_query("SELECT * FROM users WHERE username='$username'");
-		$numrows = mysql_num_rows($query);
-		if ($numrows!=0)
-		{
-			while ($row = mysql_fetch_assoc($query))
-			{
+
+		$username = $_GET['username'];
+		$password = $_GET['password'];
+
+		$connect = new mysqli("localhost","root","", "app_db") or die("Couldn't connect");
+	
+		$query = mysqli_query($connect, "SELECT * FROM users WHERE username='$username'");
+
+		$result = $connect->query("SELECT * FROM users WHERE username='$username'");
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
 				$dbusername = $row['username'];
 				$dbpassword = $row['password'];
+				$role = $row['type'];
 			}
 			if ($username==$dbusername&&$password==$dbpassword)
 			{
-				echo "login successful! <a href='member.php'>click here to access your page</a>";
+				if($role == '1'){
+					header( 'Location: user.php' ) ;
+				}
+				else if($role=='2'){
+					header( 'Location: restaurant.php' ) ;
+				}
 				$_SESSION['username'] = $dbusername;
 			}
 			else
@@ -31,5 +41,7 @@
 	}
 	else
 		die("Please enter a username and password");
+	
+
 	?>
 </html>
