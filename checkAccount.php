@@ -1,11 +1,8 @@
-<html>
-	<h1><font size=5 color=red><b>Website.com</b></font><h1><hr><hr>
-	<font size=3>
-	<?php
+<?php
 	session_start();
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	if($username&&$password) 
+	if($username&&$password)
 	{
 		$connect = mysql_connect("localhost","root","") or die("Couldn't connect");
 		mysql_select_db("phplogin") or die("couldn't find db");
@@ -32,4 +29,3 @@
 	else
 		die("Please enter a username and password");
 	?>
-</html>
