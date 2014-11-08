@@ -25,14 +25,6 @@
     </div>
   </div>
 </nav>
-  
-<!--Search bar using boot strap-->
-<form class="navbar-form navbar-left" role="search">
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Search">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
 
 <br><br><!--Used to center page-->
 <!--Non boot strap html-->
@@ -40,24 +32,26 @@
         <!--Title-->
         <!--Order form for customer-->
         <h1 class="title">Make An Order</h1>
-        <form action="" method="post" id="order">
-            <!--Title for restaurant selection-->
-            <h4 class=restSelect>Choose A Restaurant</h4>
-            <!--Select resturaunt-->
-            <select id="selectRest" class="selectRest">
-                <option value="Select Restaurant">Select Restaurant</option>
-                <option value="Rys Bagels">Ry's Bagels</option>
-                <option value="Hunan Wok">Hunan Wok</option>
-                <option value="Glassboro Pizzeria">Glassboro Pizzeria</option>
-            </select>
-            <!--Select menu items based on resturaunt-->
-        </form>
-        <!--menuItems appear here-->
-        <form action="" id="">
-            <div id="menuItems"><!--Drop down box appears in here--></div>
-        </form>
-        <form action="">
-            <input type="submit" value="Place Order!" class="btn btn-default">
+        <form action="./makeOrder.php" method="post">
+            <form method="post" id="order">
+                <!--Title for restaurant selection-->
+                <h4 class=restSelect>Choose A Restaurant</h4>
+                <!--Select resturaunt-->
+                <select id="selectRest" class="selectRest">
+                    <option value="Select Restaurant">Select Restaurant</option>
+                    <option value="Rys Bagels">Ry's Bagels</option>
+                    <option value="Hunan Wok">Hunan Wok</option>
+                    <option value="Glassboro Pizzeria">Glassboro Pizzeria</option>
+                </select>
+                <!--Select menu items based on resturaunt-->
+            </form>
+            <!--menuItems appear here-->
+            <form>
+                <div id="menuItems"><!--Drop down box appears in here--></div>
+            </form>
+            <form>
+                <input type="submit" value="Place Order!" class="btn btn-default">
+            </form>
         </form>
     </body>
 </html>
