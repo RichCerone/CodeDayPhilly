@@ -20,7 +20,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-        <img class="Brand" src=http://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Rowan_logo.png/47px-Rowan_logo.png>
+        <h4>Rowan Delviery System</h4>
       </a>
     </div>
   </div>
