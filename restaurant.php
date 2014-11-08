@@ -27,7 +27,7 @@
         <li class="dropdown">
         </li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <form class="navbar-form navbar-center" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
@@ -43,36 +43,56 @@
   $connect = mysql_connect("localhost","root","");
   mysql_select_db("app_db", $connect);
   // will change to select from orders where restaurant id = $rest_id ORDER BY(id) DESC
-  $query = mysql_query("SELECT * FROM orders WHERE rest_id='1' ORDER BY(id) DESC ");
+  $query = mysql_query("SELECT id FROM orders WHERE rest_id='1' ");
   $num_orders = mysql_num_rows($query);
   if($num_orders > 0){
-    while($row = mysql_fetch_assoc($query)){
+    while($row = mysql_fetch_array($query)){
       $all_orders[] = array(
-        'id' => $row['id'],
-        'user_id' => $row['user_id'],
-        'rest_id' => $row['rest_id'],
-        'flag' => $row['flag']
+        'id' => $row['id']
       );
     }
-    ?><pre><?
-  //  print_r($all_orders);
-    foreach($all_orders as $key => $val){
-    echo $all_orders[$key]['id']."\n";
-    //  echo $all_orders['user_id']." ".$all_orders['rest_id'];
-      /*$get_items = mysql_query("SELECT * FROM ordered_items WHERE order_id=$ord_id");
-        while($row_items = mysql_fetch_assoc($get_items)){
-          $order_items[] = array (
-          'id' => $row_items['id'],
-          'item' => $row_items['item'],
-          'quantity' => $row_items['quantity']
-        );
-      } foreach($order_items as $tr){
-        echo $tr['item']."  ".$tr['quantity'];
+    ?><pre><center><?
+    $c = 0;
+    $oldsz = 0;
+  foreach($all_orders as $order){
+    $id = $order['id'];
+    ?>
+    <center><tr class="success" align="center"><td><br>
+      <h3> <? echo $id."\n"; ?></h3>
+      </td></center>
+      <?
+    $get_items = mysql_query("SELECT * FROM ordered_items WHERE order_id = '$id'") or die (mysql_error());
+      while($row_items = mysql_fetch_assoc($get_items)){
+          $item[] = $row_items['item'];
+          $quantity[] = $row_items['quantity'];
+          $order_id[] = $row_items['order_id'];
+        }
+        if($c == 0){
+       foreach($item as $k => $v){
+         ?><td><?
+         echo $v." ".$quantity[$k];
+         ?></td><?
       }
-      */
-
     }
+     if($c > 0){
+        array_splice($item,0,$oldsz);
+        array_splice($quantity,0,$oldq);
+        array_splice($order_id,0,$old_oi);
+        foreach($item as $key => $value){
+          ?><td><?
+          echo $value." ".$quantity[$key];
+          ?><td><?
+          }
   }
+  ?>
+  </tr>
+  <?
+  $c++;
+ $oldsz = count($item);
+ $oldq = count($quantity);
+ $old_oi = count($order_id);
+  }
+ }
 
   ?></pre>
 </table>
