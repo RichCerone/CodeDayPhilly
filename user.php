@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,7 @@
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
     <title>User Main Page</title>
-
+    
     <!-- Bootstrap core CSS -->
     <link href="user_files/bootstrap.css" rel="stylesheet">
 
@@ -27,7 +28,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body class="body">
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -68,9 +69,9 @@
                 <div id="menuItems"><!--Drop down box appears in here--></div>
             </form>
             <!--Done ordering, submit order to selected restaurant-->
-            <input type="submit" value="Place Order!" id="placeOrder" class="btn btn-default">
+            <input type="submit" value="Place Order!" id="placeOrder" class="btn btn-primary">
             <!--Add button to add an additional item-->
-            <input type="submit" value="Add Item" id="addItem" class="btn btn-default">
+            <input type="submit" value="Add Item" id="addItem" class="btn btn-success">
     </center>
 
     <!-- Bootstrap core JavaScript
@@ -128,6 +129,4 @@
             });              
         });
     });
-    
-    
 </script>
