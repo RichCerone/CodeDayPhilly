@@ -29,10 +29,9 @@
 <br><br><!--Used to center page-->
 <!--Non boot strap html-->
     <body>
-        <!--Title-->
         <!--Order form for customer-->
+        <!--Title-->
         <h1 class="title">Make An Order</h1>
-        <form action="./makeOrder.php" method="post">
             <form method="post" id="order">
                 <!--Title for restaurant selection-->
                 <h4 class=restSelect>Choose A Restaurant</h4>
@@ -49,16 +48,19 @@
             <form>
                 <div id="menuItems"><!--Drop down box appears in here--></div>
             </form>
-            <form>
-                <input type="submit" value="Place Order!" class="btn btn-default">
-            </form>
-        </form>
+            <!--Done ordering, submit order to selected restaurant-->
+            <input type="submit" value="Place Order!" id="placeOrder" class="btn btn-default">
+            <!--Add button to add an additional item-->
+            <input type="submit" value="Add Item" id="addItem" class="btn btn-default">
+
     </body>
 </html>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() //Show menu items when restaurant is selected.
+    {
         var $selecter = $('#selectRest');
         var $items = $("#menuItems");
+        
         $("#order").click(function(event)
         {
             event.preventDefault();
@@ -69,5 +71,37 @@
                 $items.html(data); //Print out html from itemsForOrder.php
             });
         });
+        
+        $("#placeOrder").click(function(event) //Submit order.
+        {
+            event.preventDefault(); //Prevent redirection from page.
+            var restaurant = $selecter.val(); //Get value in drop down.
+            var $items = $("#items");
+            var items = $items.val();
+            var $quantity = $("#quantity");
+            var quanitiy = $quantity.val();
+            $.post("createOrder.php",{selectRest: restaurant},function(data)
+            {
+                   
+            });
+            //Pass values from drop down boxes and textfield and pass it into orderStatus.php.
+            $.post("orderStatus.php",{selectRest: restaurant, items: items, quantity: quantity},function(data)
+            {
+                //Empty call back.
+            });
+        });
+        
+        $("#addItem").click(function(event) //Add additional item on click.
+        {
+            event.preventDefault();
+            var restaurant = $selecter.val(); //Get value in drop down.
+            //Pass value from drop down box and pass it into itemsForOrder.php.
+            $.post("itemsForOrder.php",{selectRest: restaurant},function(data)
+            {
+                $items.append(data); //Add html from itemsForOrder.php
+            });              
+        });
     });
+    
+    
 </script>
