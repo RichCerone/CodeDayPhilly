@@ -1,38 +1,61 @@
 <?php
-//Import database connection.
-include "./dbConnect.php";
-//Post restaurant data from makeOrder.php.
-$restaurant = $_POST["selectRest"];
-//Don't display anything if default selector is posted.
-if($restaurant === "Select Restaurant")
-{
-exit();
-}
-//Get restaurant name.
-$result = mysql_query("SELECT * FROM rests WHERE name = '$restaurant'") or die(mysql_error());
-//Get the row with the restaurant name.
-$row = mysql_fetch_assoc($result);
-//id is the current selected row.
-$id = $row['id'];
-//Get the name of each item based on restaurant id.
-$query = mysql_query("SELECT name FROM items WHERE rest_id = '$id'");
-//Get item name insert into array until no more items.
-while($row_item = mysql_fetch_assoc($query))
-{
-$allItems[] = array(
-'name' => $row_item['name']
-);
-}
+    //Import database connection.
+    include "./dbConnect.php";
+    $count = 0;
+    //Post restaurant data from makeOrder.php.
+    $restaurant = $_POST["selectRest"];
+    //Don't display anything if default selector is posted.
+    if($restaurant === "Select Restaurant")
+    {
+        exit();
+    }
+    //Get restaurant name.
+    $result = mysql_query("SELECT * FROM rests WHERE name = '$restaurant'") or die(mysql_error());
+    //Get the row with the restaurant name.
+    $row = mysql_fetch_assoc($result);
+    //id is the current selected row.
+    $id = $row['id'];
+    //Get the name of each item based on restaurant id.
+    $query = mysql_query("SELECT name FROM items WHERE rest_id = '$id'");
+    //Get item name insert into array until no more items.
+    while($row_item = mysql_fetch_assoc($query))
+    {
+        $allItems[] = array(
+        'name' => $row_item['name']
+        );
+    }
 ?>
-<select id="selectRest" class="selectRest">
+
+<select id="allItems" class="selectRest">
+
 <?php
-//For all items in array...
-foreach($allItems as $item)
-{
-$menuItem = $item['name'];
+    //For all items in array...
+    foreach($allItems as $item)
+    {
+        $menuItem = $item['name'];
 ?><!--exit php-->
 <!--Echo out html using allItems array for drop down id's-->
-<option id="items" value="<?php echo $menuItem ?>"><?php echo $menuItem?></option>
+<option id="item" value="<?php echo $menuItem ?>"><?php echo $menuItem?></option>
+
 <?php
-} //Insert last bracket.
-?></select>
+    } //Insert last bracket.
+?>
+
+</select>
+<!--Let user input how many items he wants-->
+<h4>Quantity Of Items:</h4>
+<input id="quantity" type="text" value="1? 2? 3?">
+<br><!--new line in case another order is added-->
+
+<script>
+  $(document).ready(function() //Show menu items when restaurant is selected.
+  {
+      function showValues()
+      {
+        var fields = $(":input").serializeArray();
+        jQuery.each(fields, function(i, field) {
+          console.log(field.value);
+        });
+      }
+  });
+</script>

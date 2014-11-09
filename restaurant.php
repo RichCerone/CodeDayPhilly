@@ -1,8 +1,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+  $(".content").click(function(event){
+    event.preventDefault();
  $("a").click(function(event){
-        event.preventDefault();
         var uid = $(this).attr("id");
          console.log(uid);
          // post with item id to php file, update finished status in mysql
@@ -14,8 +15,8 @@ $(document).ready(function(){
                 location.reload();
               }
             });
-        });
-      });
+        })}
+      )});
 </script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
@@ -43,7 +44,8 @@ $(document).ready(function(){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="restaurant.php">Order Queue</a></li>
+        <li><a href="restaurantItemAdd.php">Add Items</a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
@@ -56,7 +58,7 @@ $(document).ready(function(){
 </nav>
 <br><br><center>
   <b><h1>Order Queue</h1>
-<div id="content">
+<div id="content" class = "content">
 <table class="table table-condensed">
 
   <?php
