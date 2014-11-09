@@ -19,7 +19,7 @@
   <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="user.php">
         <h4>Rowan Delviery System</h4>
       </a>
     </div>
@@ -80,10 +80,8 @@
             var items = $items.val();
             var $quantity = $("#quantity");
             var quanitiy = $quantity.val();
-            $.post("createOrder.php",{selectRest: restaurant},function(data)
-            {
-                   
-            });
+            $("#placeOrder").load("createOrder.php");
+    
             //Pass values from drop down boxes and textfield and pass it into orderStatus.php.
             $.post("orderStatus.php",{selectRest: restaurant, items: items, quantity: quantity},function(data)
             {

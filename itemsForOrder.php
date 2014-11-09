@@ -32,9 +32,11 @@
         $menuItem = $item['name'];
         ?><!--exit php-->
             <!--Echo out html using allItems array for drop down id's-->
-            <option value="<?php echo $menuItem ?>"><?php echo $menuItem?></option>
+            <option id="items" value="<?php echo $menuItem ?>"><?php echo $menuItem?></option>
 <?php       
     }  //Insert last bracket.
 ?></select>
+<!--Let user input how many items he wants-->
  <h4>Quantity Of Items:</h4>
-<input type="text" value="1? 2? 3?">
+<input id="quantity" type="text" value="1? 2? 3?">
+<br><!--new line in case another order is added-->
