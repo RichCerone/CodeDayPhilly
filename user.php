@@ -68,8 +68,6 @@
             <form>
                 <div id="menuItems"><!--Drop down box appears in here--></div>
             </form>
-            <h4>Quantity Of Items:</h4>
-           <input type="text" value="1? 2? 3?" id="quantity">
            <br>
             <!--Done ordering, submit order to selected restaurant-->
             <input type="submit" value="Place Order!" id="placeOrder" class="btn btn-primary">
