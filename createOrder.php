@@ -6,13 +6,14 @@ session_start();
    $username = $_SESSION["username"];
     $quantity = $_POST['quantity'];
     $item = $_POST['item'];
+    $addr = $_POST['address'];
     $result = mysql_query("SELECT id FROM users WHERE username = '$username'");
     $u_id = mysql_fetch_row($result);
     $user_id = $u_id[0];
     $result = mysql_query("SELECT id FROM rests WHERE name = '$restaurant'");
     $rest_id = mysql_fetch_row($result);
     $r_id = $rest_id[0];
-    $result = mysql_query("INSERT INTO orders(user_id, rest_id, flag) VALUES ('$user_id', '$r_id', 0)");
+    $result = mysql_query("INSERT INTO orders(user_id, rest_id, address, flag) VALUES ('$user_id', '$r_id','$addr', 0)");
     if($result){
       $get_data = mysql_query("SELECT MAX(id) FROM orders");
        $row = mysql_fetch_row($get_data);

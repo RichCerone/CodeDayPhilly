@@ -49,6 +49,9 @@
 						    <label for="PasswordText">Password</label>
 						    <input type="password" name = "registerpassword"class="form-control" id="PasswordText" placeholder="Password">
 						  </div>
+              <div class="form-group">
+                <label for="Address">Address</label>
+                <input type="text" name="registeraddress" class="form-control" id="AddressRegister" placeholder="Register Address">
 						  <div class="form-group">
 						  	<label class="radio-inline">
 							  <input type="radio" name="radio"  value=0> Individual
@@ -71,7 +74,8 @@
 
 
 
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -79,3 +83,22 @@
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
+<script>
+$(document).ready(function(){
+  geolocate();
+  function geolocate() {
+            var input = document.getElementById('AddressRegister');
+            var optns = {
+                types: ['address']
+            };
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = new google.maps.LatLng(
+                    position.coords.latitude, position.coords.longitude);
+                ac = new google.maps.places.Autocomplete(input, optns).setBounds(new google.maps.LatLngBounds(geolocation, geolocation));
+
+              });
+            }
+          }
+});
+</script>

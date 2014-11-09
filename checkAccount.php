@@ -26,7 +26,7 @@
 					header( 'Location: user.php' ) ;
 				}
 				else if($role=='2'){
-					header( 'Location: restaurant.php' ) ;
+					header( 'Location: restaurant3.php' ) ;
 				}
 				$_SESSION['username'] = $dbusername;
 			}

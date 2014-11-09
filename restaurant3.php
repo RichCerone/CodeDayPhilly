@@ -1,74 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<?php
-$connect = mysql_connect("localhost","root","");
-mysql_select_db("app_db", $connect);
-// will change to select from orders where restaurant id = $rest_id ORDER BY(id) DESC
-$query = mysql_query("SELECT id FROM orders WHERE rest_id='1' AND flag = '0' ORDER BY(id) DESC");
-$num_orders = mysql_num_rows($query);
-if($num_orders > 0){
-  while($row = mysql_fetch_array($query)){
-    $all_orders[] = array(
-      'id' => $row['id']
-    );
-  }
-  ?><pre><center><?
-  $c = 0;
-  $oldsz = 0;
-foreach($all_orders as $order){
-  $id = $order['id'];
-  ?>
-  <center>
-        <tr align="center"><td><br>
-    <h3> <? echo "Order #".$id."\n"; ?></h3>
-  </td></center><br>
-    <?
-  $get_items = mysql_query("SELECT * FROM ordered_items WHERE order_id = '$id'") or die (mysql_error());
-    while($row_items = mysql_fetch_assoc($get_items)){
-        $ids[] = $row_items['id'];
-        $item[] = $row_items['item'];
-        $quantity[] = $row_items['quantity'];
-        $order_id[] = $row_items['order_id'];
-      }
-      if($c == 0){
-     foreach($item as $k => $v){
-       $itemid = $ids[$k];
-       ?><tr class="success" align="center" id="<? echo $itemid ?>">
-      <td>
-        <a style="width: 100%;" href="<? echo $itemid ?>" id="<? echo $itemid ?>">
-        <?php
-        echo "Item: ";
-        echo $v;
-        ?><br><?php
-        echo "Quantity: ";
-        echo $quantity[$k];
-       ?></a></tr></td></a><?
-    }
-  }
-   if($c > 0){
-      array_splice($item,0,$oldsz);
-      array_splice($quantity,0,$oldq);
-      array_splice($order_id,0,$old_oi);
-      array_splice($ids,0,$old_ids);
-      foreach($item as $key => $value){
-        $i_id = $ids[$key];
-        ?><tr class="success" align="center" id="<? echo $i_id ?>">
-         <td>
-            <a style="width: 100%;" href="<? echo $i_id ?>" id="<? echo $i_id ?>">
-          <?
-        echo $value." ".$quantity[$key];
-        ?></tr></td></a><?
-        }
-}
-}
-}
-
-?>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Rowan Quick Delivery</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -94,7 +31,8 @@ foreach($all_orders as $order){
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="restaurant.php">Order Queue</a></li>
-            <li class="active"><a href="restaurantItemAdd.php">Add Items</a></li>
+            <li><a href="restaurantItemAdd.php">Add Items</a></li>
+            <li class="active"><a href="restaurant3.php">Quick Orders</a></li>
           </ul>
           <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
@@ -126,10 +64,10 @@ foreach($all_orders as $order){
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Taco</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Burrito</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Quesadilla</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Nachos</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">bagel</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">bagel with cream cheese</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">special</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Nachos</a></li>
           </ul>
           <label>Quantity</label>
           <input type="number" id="quantity" value="1" min="1" max="10">
@@ -156,8 +94,101 @@ foreach($all_orders as $order){
     </div>
     <center>
       <div class="row">
-      <span class ="col-sm-8 col-sm-offset-2" id="wellBody"></span>
-      </div>
+      <span class ="col-sm-8 col-sm-offset-2" id="wellBody">
+        <div class="well" id = "content">
+      <?php
+      error_reporting(0);
+      session_start();
+      $user = $_SESSION['username'];
+      $connect = mysql_connect("localhost","root","");
+      mysql_select_db("app_db", $connect);
+      $get_use_id = mysql_query("SELECT id FROM users WHERE username='$user'");
+      $row_id = mysql_fetch_row($get_use_id);
+      $id = $row_id[0];
+      // will change to select from orders where restaurant id = $rest_id ORDER BY(id) DESC
+      $query = mysql_query("SELECT id,address FROM orders WHERE rest_id='$id' AND flag = '0' ORDER BY(id) DESC");
+      $num_orders = mysql_num_rows($query);
+      if($num_orders > 0){
+        while($row = mysql_fetch_array($query)){
+          $all_orders[] = array(
+            'id' => $row['id'],
+            'address' => $row['address']
+          );
+        }
+        ?><center><?
+        $c = 0;
+        $oldsz = 0;
+      foreach($all_orders as $order){
+        $id = $order['id'];
+        $address = $order['address'];
+        ?>
+        <center>
+
+          <h3> <? echo "Order #".$id."\n"; ?></h3>
+        </center><br>
+          <?
+        $get_items = mysql_query("SELECT * FROM ordered_items WHERE order_id = '$id'") or die (mysql_error());
+          while($row_items = mysql_fetch_assoc($get_items)){
+              $ids[] = $row_items['id'];
+              $item[] = $row_items['item'];
+              $quantity[] = $row_items['quantity'];
+              $order_id[] = $row_items['order_id'];
+
+            }
+            if($c == 0){
+           foreach($item as $k => $v){
+             $itemid = $ids[$k];
+             ?>
+              <a style="width: 100%;" href="<? echo $itemid ?>" id="<? echo $itemid ?>" class="anchors_orders">
+              <?php
+              echo "Item: ";
+              echo $v;
+              ?><br><?php
+              echo "Quantity: ";
+              echo $quantity[$k];
+              ?><br><?php
+              echo "Address: ";
+              echo $address;
+             ?></a><?
+          }
+        }
+         if($c > 0){
+            array_splice($item,0,$oldsz);
+            array_splice($quantity,0,$oldq);
+            array_splice($order_id,0,$old_oi);
+            array_splice($ids,0,$old_ids);
+
+            foreach($item as $key => $value){
+              $i_id = $ids[$key];
+              ?>
+                  <a style="width: 100%;" href="<? echo $i_id ?>" id="<? echo $i_id ?>" class="anchors_orders">
+                <?
+              echo "Item: ";
+              echo $value;
+              ?><br><?php
+              echo "Quantity: ";
+              echo $quantity[$key];
+              ?><br><?php
+              echo "Address: ";
+              echo $address;
+              ?></a></div><?
+
+              }
+            }
+            $c++;
+           $oldsz = count($item);
+           $oldq = count($quantity);
+           $old_oi = count($order_id);
+           $old_ids = count($ids);
+          }
+      }
+      ?>
+      <hr>
+      <center><p>View last map</p></center>
+      <br>
+      <button type='button' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#mapModal'id ='additemBtn' ><span class='glyphicon glyphicon-flag'></span> View Map</button>
+    </div>
+      </span>
     </center>
   </div>
 <!-- Modal -->
@@ -176,11 +207,10 @@ foreach($all_orders as $order){
           center = "39.7001, 75.1114"
           zoom = "14"
           frameborder="0" style="border:0"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgiM9vSlIUNiUKdisryCPAFt7Qg4qxNT4">
+          src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDgiM9vSlIUNiUKdisryCPAFt7Qg4qxNT4&center=39.7261,-75.1324&zoom=14&origin=325+Mullica+Hill+Rd+Glassboro&destination=9+Williamsburg+Court+Glassboro">
         </iframe>
           </div>
           <div class="modal-footer">
-
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -188,11 +218,30 @@ foreach($all_orders as $order){
     </div>
 
 
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript">
+  $(document).ready(function(){
+            $("#content").click(function(event){
+              event.preventDefault();
+           $("a").click(function(event){
+                  var uid = $(this).attr("id");
+                   console.log(uid);
+                   // post with item id to php file, update finished status in mysql
+                   // if all rows with same order id have status flag 1 then order has
+                   // been processed
+                   $.post('UpdateStat.php', {id: uid}, function(data){
+                        console.log(data);
+                        if(data == "done"){
+                          location.reload();
+                        }
+                      });
+                  })
+                  })
+            });
+    </script>
   </body>
 </html>

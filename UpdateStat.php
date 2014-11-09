@@ -15,7 +15,7 @@ if($query){
   $get_ord_id = mysql_query("SELECT order_id FROM ordered_items WHERE id='$item_id'");
   $ord_id = mysql_fetch_assoc($get_ord_id);
   $orderId = $ord_id['order_id'];
-  $checkOrder = mysql_query("SELECT * FROM ordered_items WHERE status='0' AND order_id='$orderId'") or die(mysql_error());
+  $checkOrder = mysql_query("SELECT * FROM ordered_items WHERE order_id='$orderId' AND status='0'") or die(mysql_error());
   $rows = mysql_num_rows($checkOrder);
   if($rows == 0){
     echo "done";

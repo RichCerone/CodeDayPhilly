@@ -60,6 +60,9 @@
                     <option value="Hunan Wok">Hunan Wok</option>
                     <option value="Glassboro Pizzeria">Glassboro Pizzeria</option>
                 </select>
+                <br>
+                Address<br>
+                <input class="addrBox" type="text" id="addr" name="addr" maxlength="200"></input><br>
                 <!--Select menu items based on resturaunt-->
             </form>
             <!--menuItems appear here-->
@@ -69,6 +72,7 @@
            <br>
             <!--Done ordering, submit order to selected restaurant-->
             <input type="submit" value="Place Order!" id="placeOrder" class="btn btn-default">
+            <div id="javascriptMessage"></div>
             <!--Add button to add an additional item-->
             <!--<input type="submit" value="Add Item" id="addItem" class="btn btn-default">-->
     </center>
@@ -76,6 +80,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
     <script src="user_files/jquery.js"></script>
     <script src="user_files/bootstrap.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -87,6 +93,7 @@
 <script>
     $(document).ready(function() //Show menu items when restaurant is selected.
     {
+      geolocate();
         var $selecter = $('#selectRest');
         var $items = $("#menuItems");
 
@@ -104,16 +111,20 @@
         $("#placeOrder").click(function(event) //Submit order.
         {
             event.preventDefault(); //Prevent redirection from page.
+            document.getElementById("javascriptMessage").innerHTML = "Sent!"; //Sends a message to bottom of screen
             var restaurant = $selecter.val(); //Get value in drop down.
             var $items = $("#allItems");
             var items = $items.val();
             var $quantity = $("#quantity");
             var quantity = $quantity.val();
+            var $address = $('#addr');
+            var addr = $address.val();
             console.log(items);
             console.log(restaurant);
             console.log(quantity);
+            console.log(addr);
 
-            $.post("createOrder.php",{selectRest: restaurant, item: items, quantity: quantity},function(data)
+            $.post("createOrder.php",{selectRest: restaurant, item: items, quantity: quantity, address: addr},function(data)
             {
 
             });
@@ -134,6 +145,20 @@
                 $items.append(data); //Add html from itemsForOrder.php
             });
         });
+        function geolocate() {
+                  var input = document.getElementById('addr');
+                  var optns = {
+                      types: ['address']
+                  };
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                      var geolocation = new google.maps.LatLng(
+                          position.coords.latitude, position.coords.longitude);
+                      ac = new google.maps.places.Autocomplete(input, optns).setBounds(new google.maps.LatLngBounds(geolocation, geolocation));
+
+                    });
+                  }
+                }
     });
 
 

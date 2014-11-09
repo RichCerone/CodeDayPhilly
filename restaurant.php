@@ -46,6 +46,7 @@ $(document).ready(function(){
       <ul class="nav navbar-nav">
         <li class="active"><a href="restaurant.php">Order Queue</a></li>
         <li><a href="restaurantItemAdd.php">Add Items</a></li>
+        <li><a href="restaurant3.php">Quick Orders</a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
@@ -57,7 +58,10 @@ $(document).ready(function(){
   </div><!-- /.container-fluid -->
 </nav>
 <br><br><center>
-  <b><h1>Order Queue</h1>
+  <b><h1>Order Queue</h1><br>
+    <p>Shows recently sent orders. <br>
+      Double-click the orders to close them and send
+      back to the user that their order has been started.</p></b>
 <div id="content" class = "content">
 <table class="table table-condensed">
 

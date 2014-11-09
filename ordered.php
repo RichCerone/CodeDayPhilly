@@ -57,14 +57,6 @@ if(count($stuff) != 0) //If array is empty, ignore
 			echo "Current state: ";
 			if($flag == 1)
 			{
-				echo "Currently in progress.";
-			}
-			else if($flag == 2)
-			{
-				echo "Cooking.";
-			}
-			else if($flag == 3)
-			{
 				echo "Being delivered.";
 			}
 			else

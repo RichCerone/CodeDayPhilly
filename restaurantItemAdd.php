@@ -26,6 +26,7 @@
       <ul class="nav navbar-nav">
         <li><a href="restaurant.php">Order Queue</a></li>
         <li class="active"><a href="restaurantItemAdd.php">Add Items</a></li>
+        <li><a href="restaurant3.php">Quick Orders</a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
@@ -42,10 +43,10 @@
 <table class="table table-condensed">
   <form action="" method="POST">
     Name:&nbsp
-    <input type="text" name="name" class="name">
+    <input type="text" name="name" id="name" class="name">
     <br>
     Price:&nbsp
-    <input type="text" name="price" class="price">
+    <input type="text" name="price" id="price" class="price">
     <br>
     <br>
     <button type="submit" class="btn btn-success">Submit</button>
@@ -54,3 +55,14 @@
 </table>
 </center>
 </div>
+<?php
+include("dbConnect.php");
+if(isset($_POST['name']) && isset($_POST['price'])){
+$name = $_POST['name'];
+$price = $_POST['price'];
+$query = mysql_query("INSERT INTO items(name,price) VALUES('$name','$price')");
+if($query){
+  ?><center><div>"success"</div></center><?php
+}
+}
+?>
