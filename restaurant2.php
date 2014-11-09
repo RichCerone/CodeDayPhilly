@@ -9,7 +9,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="stylesRestaurant2.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
   <body>
   	<div class="container">
@@ -28,8 +28,7 @@
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		        <h4 class="modal-title" id="myModalLabel">Add Order</h4>
 		        <div class="dropdown">
-				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-				    select item
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"  data-toggle="dropdown">item
 				    <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -39,22 +38,33 @@
 				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Nachos</a></li>
 				  </ul>
 				  <label>Quantity</label>
-				  <input type="number"  placeholder="0">
-		      </div>
-		      <div class="modal-body">
-		      		<span class="modalbody"></span>
-				</div>
-		       <button type="button" class="btn btn-success btn-sm" onClick="addOrder()"id ="additemBtn" >
+				  <input type="number" id="quantity" value="1" min="1" max="10">
+		      
+		      <button type="button" class="btn btn-success btn-sm" onClick="addOrder()"id ="additemBtn" >
   					<span class="glyphicon glyphicon-plus"></span> Add Item
 				</button>
+				</div>
+				<hr>
+		      <div class="modal-body">
+		      		<span id="modalbody"></span>
+				</div>
+		       
 		      </div>
 		      <div class="modal-footer">
+		      	<div class="col-xs-8">
+    				<input type="text" id="address" class="form-control" placeholder="address">
+ 				</div>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
+		        <button type="button" class="btn btn-primary" onClick="addOrderWell()" >Save changes</button>
 		      </div>
 		    </div>
 		  </div>
 		</div>
+		<center>
+			<div class="row">
+			<span class ="col-sm-8 col-sm-offset-2" id="wellBody"></span>
+			</div>
+		</center>
 	</div>
 
 
