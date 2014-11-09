@@ -68,6 +68,9 @@
             <form>
                 <div id="menuItems"><!--Drop down box appears in here--></div>
             </form>
+            <h4>Quantity Of Items:</h4>
+           <input type="text" value="1? 2? 3?" id="quantity">
+           <br>
             <!--Done ordering, submit order to selected restaurant-->
             <input type="submit" value="Place Order!" id="placeOrder" class="btn btn-primary">
             <!--Add button to add an additional item-->
@@ -90,7 +93,7 @@
     {
         var $selecter = $('#selectRest');
         var $items = $("#menuItems");
-        
+
         $("#order").click(function(event)
         {
             event.preventDefault();
@@ -101,23 +104,31 @@
                 $items.html(data); //Print out html from itemsForOrder.php
             });
         });
-        
+
         $("#placeOrder").click(function(event) //Submit order.
         {
             event.preventDefault(); //Prevent redirection from page.
             var restaurant = $selecter.val(); //Get value in drop down.
-            var $items = $("#items");
+            var $items = $("#allItems");
             var items = $items.val();
             var $quantity = $("#quantity");
+            var quantity = $quantity.val();
+            console.log(items);
+            console.log(restaurant);
+            console.log(quantity);
+
+            $.post("createOrder.php",{selectRest: restaurant, item: items, quantity: quantity},function(data)
+            {
+                console.log("returned : " + data);
+            });
             var quanitiy = $quantity.val();
-    
             //Pass values from drop down boxes and textfield and pass it into orderStatus.php.
             $.post("orderStatus.php",{selectRest: restaurant, items: items, quantity: quantity},function(data)
             {
                 //Empty call back.
             });
         });
-        
+
         $("#addItem").click(function(event) //Add additional item on click.
         {
             event.preventDefault();
@@ -126,7 +137,13 @@
             $.post("itemsForOrder.php",{selectRest: restaurant},function(data)
             {
                 $items.append(data); //Add html from itemsForOrder.php
-            });              
+            });
         });
     });
+<<<<<<< HEAD
 </script>
+=======
+
+
+</script>
+>>>>>>> 7a75d9230bb65aeb2ad7e3c336aca09ba3360a32

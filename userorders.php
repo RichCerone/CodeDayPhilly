@@ -1,3 +1,6 @@
+<?php
+include_once("ordered.php");
+?>
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -58,6 +61,6 @@
     <script src="user_files/bootstrap.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="user_files/ie10-viewport-bug-workaround.js"></script>
-  
+
 
 </body></html>
