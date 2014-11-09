@@ -24,7 +24,7 @@
                           );
     }
     ?>
-    <select id="selectRest" class="selectRest">
+    <select id="allItems" class="selectRest">
     <?php
     //For all items in array...
     foreach($allItems as $item)
@@ -33,8 +33,6 @@
         ?><!--exit php-->
             <!--Echo out html using allItems array for drop down id's-->
             <option value="<?php echo $menuItem ?>"><?php echo $menuItem?></option>
-<?php       
+<?php
     }  //Insert last bracket.
 ?></select>
- <h4>Quantity Of Items:</h4>
-<input type="text" value="1? 2? 3?">
