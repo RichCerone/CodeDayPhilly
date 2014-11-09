@@ -15,6 +15,21 @@ $(document).ready(function(){
               }
             });
         });
+var cacheData;
+var data = $('#content').html();
+var auto_refresh = setInterval(
+	function()
+	{
+	$.ajax({
+		url: 'restaurant_data.php',
+		type: 'GET',
+		data: { method: 'fetch' },
+		dataType: 'html',
+		success: function(data){
+      $('#content').html(data);
+			}
+		})
+	},900);
       });
 </script>
 <!-- Latest compiled and minified CSS -->
@@ -56,12 +71,14 @@ $(document).ready(function(){
 </nav>
 <br><br><center>
   <b><h1>Order Queue</h1>
+<div id="content">
 <table class="table table-condensed">
+
   <?php
   $connect = mysql_connect("localhost","root","");
   mysql_select_db("app_db", $connect);
   // will change to select from orders where restaurant id = $rest_id ORDER BY(id) DESC
-  $query = mysql_query("SELECT id FROM orders WHERE rest_id='1' AND flag = '0' ");
+  $query = mysql_query("SELECT id FROM orders WHERE rest_id='1' AND flag = '0' ORDER BY(id) DESC");
   $num_orders = mysql_num_rows($query);
   if($num_orders > 0){
     while($row = mysql_fetch_array($query)){
@@ -125,5 +142,7 @@ $(document).ready(function(){
  }
 
   ?></pre>
+</div>
 </table>
 </center>
+</div>
