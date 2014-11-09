@@ -109,10 +109,7 @@
             var items = $items.val();
             var $quantity = $("#quantity");
             var quanitiy = $quantity.val();
-            $.post("createOrder.php",{selectRest: restaurant},function(data)
-            {
-                   
-            });
+    
             //Pass values from drop down boxes and textfield and pass it into orderStatus.php.
             $.post("orderStatus.php",{selectRest: restaurant, items: items, quantity: quantity},function(data)
             {
