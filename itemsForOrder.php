@@ -36,7 +36,3 @@ $menuItem = $item['name'];
 <?php
 } //Insert last bracket.
 ?></select>
-<!--Let user input how many items he wants-->
-<h4>Quantity Of Items:</h4>
-<input id="quantity" type="text" value="1? 2? 3?">
-<br><!--new line in case another order is added-->
