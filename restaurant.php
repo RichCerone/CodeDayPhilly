@@ -16,18 +16,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-
-      <a class="navbar-brand" href="#">Rowan Delivery System</a>
+      <a class="navbar-brand" href="#">Brand</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+        </li>
       </ul>
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form navbar-center" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search Customers">
+          <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
@@ -55,9 +57,9 @@
   foreach($all_orders as $order){
     $id = $order['id'];
     ?>
-    <center><tr align="center"><td><br>
-      <h3> <? echo "Order #".$id."\n"; ?></h3>
-    </td></center><br>
+    <center><tr class="success" align="center"><td><br>
+      <h3> <? echo $id."\n"; ?></h3>
+      </td></center>
       <?
     $get_items = mysql_query("SELECT * FROM ordered_items WHERE order_id = '$id'") or die (mysql_error());
       while($row_items = mysql_fetch_assoc($get_items)){
@@ -67,9 +69,9 @@
         }
         if($c == 0){
        foreach($item as $k => $v){
-         ?><tr class="success" align="center"><td><?
+         ?><td><?
          echo $v." ".$quantity[$k];
-         ?></tr></td><?
+         ?></td><?
       }
     }
      if($c > 0){
@@ -77,13 +79,13 @@
         array_splice($quantity,0,$oldq);
         array_splice($order_id,0,$old_oi);
         foreach($item as $key => $value){
-          ?><tr class="success" align="center"><td><?
+          ?><td><?
           echo $value." ".$quantity[$key];
-          ?></tr></td><?
+          ?><td><?
           }
   }
   ?>
-</tr>
+  </tr>
   <?
   $c++;
  $oldsz = count($item);
@@ -92,6 +94,7 @@
   }
  }
 
-  ?></pre>
+  ?>
+</pre>
 </table>
 </center>
