@@ -12,7 +12,7 @@ session_start();
     $result = mysql_query("SELECT id FROM rests WHERE name = '$restaurant'");
     $rest_id = mysql_fetch_row($result);
     $r_id = $rest_id[0];
-    $result = mysql_query("INSERT INTO orders(user_id, rest_id, flag) VALUES ('$user_id', '$r_id', '0')");
+    $result = mysql_query("INSERT INTO orders(user_id, rest_id, flag) VALUES ('$user_id', '$r_id', 0)");
     if($result){
       $get_data = mysql_query("SELECT MAX(id) FROM orders");
        $row = mysql_fetch_row($get_data);

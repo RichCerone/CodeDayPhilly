@@ -2,6 +2,7 @@
     //Import database connection.
     include "./dbConnect.php";
     $count = 0;
+
     //Post restaurant data from makeOrder.php.
     $restaurant = $_POST["selectRest"];
     //Don't display anything if default selector is posted.
@@ -46,16 +47,3 @@
 <h4>Quantity Of Items:</h4>
 <input id="quantity" type="text" value="1? 2? 3?">
 <br><!--new line in case another order is added-->
-
-<script>
-  $(document).ready(function() //Show menu items when restaurant is selected.
-  {
-      function showValues()
-      {
-        var fields = $(":input").serializeArray();
-        jQuery.each(fields, function(i, field) {
-          console.log(field.value);
-        });
-      }
-  });
-</script>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Rowan Delivery Systems</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 
 						  </div>
 						  <button type="submit" class="btn btn-success">Log in</button>
-						</form>	
+						</form>
 					</center>
     			</div>
     		</div>
@@ -61,7 +61,7 @@
 							</label>
 						  </div>
 						  <button type="submit" name="registerButton" class="btn btn-primary">Register</button>
-						</form>	
+						</form>
 					</center>
     		</div>
 		</div>

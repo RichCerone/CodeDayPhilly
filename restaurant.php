@@ -97,8 +97,12 @@ $(document).ready(function(){
          ?><tr class="success" align="center" id="<? echo $itemid ?>">
         <td>
           <a style="width: 100%;" href="<? echo $itemid ?>" id="<? echo $itemid ?>">
-          <?
-         echo $v." ".$quantity[$k];
+          <?php
+          echo "Item: ";
+          echo $v;
+          ?><br><?php
+          echo "Quantity: ";
+          echo $quantity[$k];
          ?></a></tr></td></a><?
       }
     }

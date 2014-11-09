@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,8 +27,7 @@
     <![endif]-->
   </head>
 
-  <body class="body">
-
+  <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -70,9 +68,9 @@
             </form>
            <br>
             <!--Done ordering, submit order to selected restaurant-->
-            <input type="submit" value="Place Order!" id="placeOrder" class="btn btn-primary">
+            <input type="submit" value="Place Order!" id="placeOrder" class="btn btn-default">
             <!--Add button to add an additional item-->
-            <input type="submit" value="Add Item" id="addItem" class="btn btn-success">
+            <!--<input type="submit" value="Add Item" id="addItem" class="btn btn-default">-->
     </center>
 
     <!-- Bootstrap core JavaScript
@@ -107,7 +105,7 @@
         {
             event.preventDefault(); //Prevent redirection from page.
             var restaurant = $selecter.val(); //Get value in drop down.
-            var $items = $("#menuItems");
+            var $items = $("#allItems");
             var items = $items.val();
             var $quantity = $("#quantity");
             var quantity = $quantity.val();
@@ -117,9 +115,8 @@
 
             $.post("createOrder.php",{selectRest: restaurant, item: items, quantity: quantity},function(data)
             {
-                console.log("returned : " + data);
+
             });
-            var quanitiy = $quantity.val();
             //Pass values from drop down boxes and textfield and pass it into orderStatus.php.
             $.post("orderStatus.php",{selectRest: restaurant, items: items, quantity: quantity},function(data)
             {
@@ -138,4 +135,6 @@
             });
         });
     });
+
+
 </script>

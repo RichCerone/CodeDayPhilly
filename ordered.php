@@ -9,16 +9,21 @@ session_start();
 	$result = mysql_query("SELECT * FROM orders WHERE user_id = '$id'") or die(mysql_error());
 	?><div id="orders" class="orders"><ul><?php
 	$count = 1;
+	$stuff = null; //Sets array to null
 	while($row = mysql_fetch_assoc($result))
 	{
 			$stuff[] = array(
 				'rest_id' => $row['rest_id'],
-				'id' => $row['id']
+				'id' => $row['id'],
+				'flag' => $row['flag']
 			);
 
 }
-foreach($stuff as $mstuff){
+if(count($stuff) != 0) //If array is empty, ignore
+{
+	foreach($stuff as $mstuff){
 		$res = $mstuff['rest_id'];
+		$flag = $mstuff['flag'];
 		$result = mysql_query("SELECT name FROM rests WHERE id = '$res'");
 		$restName = mysql_fetch_row($result);
 		$r_name = $restName[0];
@@ -39,14 +44,32 @@ foreach($stuff as $mstuff){
 					echo "Item Name: ";
 					echo $item_id;
 					?><br><?php
-					echo "Item Price: ";
+					echo "Item Price: $";
 					echo $itemPrice;
 					?><br><?php
 					echo "Quantity: ";
 					echo $qts[$key];
 					?><br><?php
-					echo "Total Price: ";
+					echo "Total Price: $";
 					echo $itemPrice * $qts[$key];
+			}
+			?><br><?php
+			echo "Current state: ";
+			if($flag == 1)
+			{
+				echo "Currently in progress.";
+			}
+			else if($flag == 2)
+			{
+				echo "Cooking.";
+			}
+			else if($flag == 3)
+			{
+				echo "Being delivered.";
+			}
+			else
+			{
+				echo "Sent.";
 			}
 			unset($qts);
 		}
@@ -55,4 +78,5 @@ foreach($stuff as $mstuff){
 		$count += 1;
 	}
 	?></ul></div><?php
+}
 ?>
