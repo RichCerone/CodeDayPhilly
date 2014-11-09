@@ -15,9 +15,22 @@ $(document).ready(function(){
               }
             });
         });
+var cacheData;
+var data = $('#content').html();
+var auto_refresh = setInterval(
+	function()
+	{
+	$.ajax({
+		url: 'restaurant_data.php',
+		type: 'GET',
+		data: { method: 'fetch' },
+		dataType: 'html',
+		success: function(data){
+      $('#content').html(data);
+			}
+		})
+	},900);
       });
-
-
 </script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">

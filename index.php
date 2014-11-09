@@ -40,32 +40,30 @@
     		<div class="col-sm-4">
     			<div id ="registerwell" class="well well-lg">
     				<center>
-    					<form role="form">
+    					<form role="form" action ="registerAccount.php">
   						<div class="form-group">
 						    <label for="UserNameRegister">Username</label>
-						    <input type="text" class="form-control" id="UserNameRegister" placeholder="Register Username">
+						    <input type="text" name = "registerusername" class="form-control" id="UserNameRegister" placeholder="Register Username">
 						  </div>
 						  <div class="form-group">
 						    <label for="PasswordText">Password</label>
-						    <input type="password" class="form-control" id="PasswordText" placeholder="Password">
+						    <input type="password" name = "registerpassword"class="form-control" id="PasswordText" placeholder="Password">
 						  </div>
 						  <div class="form-group">
 						  	<label class="radio-inline">
-							  <input type="radio" name="individualOption" id="individualOption" value=0> Individual
+							  <input type="radio" name="radio"  value=0> Individual
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="" id="organizationOption" value=1> Organization
+							  <input type="radio" name="radio"  value=1> Organization
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="RestaurantOption" id="RestaurantOption" value=2> Restaurant
+							  <input type="radio" name="radio"  value=2> Restaurant
 							</label>
 						  </div>
-						  <button type="submit" class="btn btn-primary">Register</button>
+						  <button type="submit" name="registerButton" class="btn btn-primary">Register</button>
 						</form>	
 					</center>
     		</div>
-
-			<p>hiii</p>
 		</div>
 	</div>
 
@@ -77,6 +75,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
