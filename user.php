@@ -86,6 +86,7 @@
 	</body>
 </html>
 
+<!--Javascript-->
 <script>
     $(document).ready(function() //Show menu items when restaurant is selected.
     {
