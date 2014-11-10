@@ -107,7 +107,7 @@
 
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAd_qUj056TQ8botUBBwAoRY8Mm5z4O8Lk&libraries=places"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript"></script>
+    <script type="text/javascript" src="script.js"></script>
 <script>
 $(document).ready(function(){
   var lat;
@@ -146,7 +146,7 @@ $(document).ready(function(){
               });
             }
           }
-          
+
 });
 
 </script>
